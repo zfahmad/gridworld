@@ -4,6 +4,9 @@ class Gridworld:
         self.width = width
         self.grid = []
 
+        # Initialize the gridworld with a specified
+        # number of rows and columns
+
         for _ in range(height):
             row = []
             for _ in range(width):
@@ -15,12 +18,16 @@ class Gridworld:
         self.goal = goal
 
     def reset(self):
+        # Return the state to the start state
         return self.start
 
     def print_grid(self):
+        # Print gridworld to terminal
         print(self.grid)
 
     def get_actions(self, state: int) -> list: 
+        # Return a list of legal actions
+        # Legal actions constitutes a movement in cardinal direction
         row = state // self.width
         col = state % self.width
         legalActions = []
@@ -62,24 +69,3 @@ class Gridworld:
     def is_goal(self, state) -> bool:
         return state == self.goal
             
-
-
-if __name__ == "__main__":
-    gw = Gridworld(4, 5, 0, 19)
-    gw.print_grid()
-    print(gw.get_actions(0))
-    print(gw.is_goal(0))
-    print(gw.get_actions(19))
-    print(gw.is_goal(19))
-    print(gw.get_actions(6))
-    print(gw.is_goal(6))
-    print(gw.get_actions(10))
-    print(gw.is_goal(10))
-    print(gw.get_actions(34))
-    print(gw.is_goal(34))
-    
-    for action in ["N", "E", "S", "W"]:
-        print(gw.apply_action(6, action))
-    
-    for action in ["N", "E", "S", "W"]:
-        print(gw.apply_action(5, action))
