@@ -6,4 +6,5 @@ gw.grid[1][1] = 1
 gw.grid[2][1] = 1
 gw.grid[3][1] = 1
 gw.grid[4][1] = 1
+print(gw.grid)
 draw_gridworld(gw, 4, 88, 0)

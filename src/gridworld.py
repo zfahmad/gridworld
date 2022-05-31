@@ -30,41 +30,51 @@ class Gridworld:
         # Legal actions constitutes a movement in cardinal direction
         row = state // self.width
         col = state % self.width
-        legalActions = []
 
         if state > self.height * self.width or self.grid[row][col] == 1:
             print("Invalid state!")
             return []
 
-        # print(f"state: {state} row: {row} col: {col}")
-        
-        if col - 1 >= 0:
-            if self.grid[row][col - 1] != 1:
-                legalActions.append("W")
-
-        if col + 1 < self.width:
-            if self.grid[row][col + 1] != 1:
-                legalActions.append("E")
-
-        if row - 1 >= 0:
-            if self.grid[row - 1][col] != 1:
-                legalActions.append("N")
-
-        if row + 1 < self.height:
-            if self.grid[row + 1][col] != 1: 
-                legalActions.append("S")
-
+        legalActions = ['N', 'S', 'E', 'W']
         return legalActions
 
     def apply_action(self, state, action) -> int:
-        try:
-            if action not in self.get_actions(state):
-                raise ValueError
-        except ValueError:
-            print("Invalid action!")
+        
+        row = state // self.width
+        col = state % self.width
+        shift = 0
+
+        if state > self.height * self.width or self.grid[row][col] == 1:
+            print("Invalid state!")
             return state
 
-        return state + self.actions[action]
+        # print(f"state: {state} row: {row} col: {col}")
+        
+        if action == "W":
+            if col - 1 >= 0 and self.grid[row][col - 1] != 1:
+                shift = self.actions["W"]
+            else:
+                shift = 0
+
+        if action == "E":
+            if col + 1 < self.width and self.grid[row][col + 1] != 1:
+                shift = self.actions["E"]
+            else:
+                shift = 0
+
+        if action == "N":
+            if row - 1 >= 0 and self.grid[row - 1][col] != 1:
+                shift = self.actions["N"]
+            else:
+                shift = 0
+
+        if action == "S":
+            if row + 1 < self.height and self.grid[row + 1][col] != 1: 
+                shift = self.actions["S"]
+            else:
+                shift = 0
+
+        return state + shift
 
     def is_goal(self, state) -> bool:
         return state == self.goal

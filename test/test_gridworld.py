@@ -5,14 +5,15 @@ gw = Gridworld(4, 5, 0, 19)
 
 class TestGridworld(unittest.TestCase):
     def test_get_actions(self):
+        expected = ["N", "S", "E", "W"]
         output = gw.get_actions(0)
-        self.assertListEqual(output, ['E', 'S'])
+        self.assertListEqual(output, expected)
         output = gw.get_actions(19)
-        self.assertListEqual(output, ['W', 'N'])
+        self.assertListEqual(output, expected)
         output = gw.get_actions(6)
-        self.assertListEqual(output, ['W', 'E', 'N', 'S'])
+        self.assertListEqual(output, expected)
         output = gw.get_actions(10)
-        self.assertListEqual(output, ['E', 'N', 'S'])
+        self.assertListEqual(output, expected)
 
     def test_apply_action(self):
     
