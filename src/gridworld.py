@@ -76,6 +76,10 @@ class Gridworld:
 
         return state + shift
 
-    def is_goal(self, state) -> bool:
-        return state == self.goal
+    def is_goal(self, state):
+        goal = state == self.goal
+        if goal:
+            return goal, 1
+        else:
+            return goal, 0
             

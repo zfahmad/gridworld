@@ -1,2 +1,4 @@
 pyrightconfig.json
 **/__pycache__
+/venv
+.vscode/settings.json

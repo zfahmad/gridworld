@@ -26,6 +26,12 @@ class TestGridworld(unittest.TestCase):
         for action, result in zip(["N", "E", "S", "W"], expected):
             output = gw.apply_action(5, action)
             self.assertEqual(result, output)
+        
+    def test_is_goal(self):
+        output = gw.is_goal(19)
+        self.assertTupleEqual(output, (True, 1))
+        output = gw.is_goal(1)
+        self.assertTupleEqual(output, (False, 0))
 
 
 if __name__ == '__main__':
