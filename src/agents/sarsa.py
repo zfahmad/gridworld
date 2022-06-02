@@ -17,7 +17,7 @@ class SarsaAgent(Agent):
         for _ in range(num_states):
             state_action_values = []
             for _ in range(4):
-                state_action_values.append(0)
+                state_action_values.append(0.0)
             q_table.append(state_action_values)
         return q_table
 
