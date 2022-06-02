@@ -1,16 +1,15 @@
 from random import random
-from src.agents.agent import Agent
+from agents.agent import Agent
 import policies.tabular_policies as tp
 
 class SarsaAgent(Agent):
-    def __init__(self, name, num_states, gamma, policy, alpha, epsilon=0.0):
+    def __init__(self, name, num_states, gamma, policy, alpha):
         self.name = name
         self.q_table = self.init_q_table(num_states)
         self.actions = ["N", "S", "E", "W"]
         self.gamma = gamma
-        self.policy = getattr(tp, policy)
+        self.policy = policy
         self.alpha = alpha
-        self.epsilon = epsilon
 
     def init_q_table(self, num_states):
         q_table = []
@@ -22,7 +21,7 @@ class SarsaAgent(Agent):
         return q_table
 
     def select_action(self, state) -> str:
-        action_index = self.policy(self.q_table[state], self.epsilon)
+        action_index = self.policy(self.q_table[state])
         return self.actions[action_index]
 
     def update(self, state, action, reward, next_state, next_action):

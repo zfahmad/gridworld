@@ -2,7 +2,7 @@ import random
 
 from numpy import argmax, Inf
 
-def epsilon_greedy(q_values: list, epsilon: float):
+def epsilon_greedy(q_values: list, epsilon=0.1):
     # Returns max valued action with 1 - epsilon probability
     # Otherwise select a random action with epsilon probability
     

@@ -1,19 +1,20 @@
-from src.gridworld import Gridworld
-from src.agents.sarsa import SarsaAgent
-from src.policies.tabular_policies import epsilon_greedy
+from gridworld import Gridworld
+from agents.sarsa import SarsaAgent
+import policies.tabular_policies
 import matplotlib.pyplot as plt
 import numpy as np
 
 gw = Gridworld(10, 10, 0, 80)
-# for i in range(7):
-#     gw.grid[7][i] = 1
+for i in range(7):
+    gw.grid[7][i] = 1
 max_steps = 1000
 num_episodes = 200
 num_trials = 100
 avg_num_steps = np.zeros(num_episodes)
+policy = getattr(policies.tabular_policies, "epsilon_greedy")
 
 for trial in range(num_trials):
-    agent = SarsaAgent("sarsa", gw.width * gw.height, .99, "epsilon_greedy", 0.1, 0.1)
+    agent = SarsaAgent("sarsa", gw.width * gw.height, .99, policy, 0.1)
     steps_per_episode = []
 
     for episode in range(num_episodes):
