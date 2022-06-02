@@ -25,6 +25,8 @@ class Agent(Agent):
         action_index = self.policy(self.q_table[state])
         return self.actions[action_index]
 
+    # TODO: Fix broken update in Q-learning.
+    
     def update(self, state, action, reward, next_state, next_action):
         q_val = self.q_table[state][self.actions.index(action)]
 
