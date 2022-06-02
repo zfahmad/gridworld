@@ -24,22 +24,17 @@ class Agent(Agent):
     def select_action(self, state) -> str:
         action_index = self.policy(self.q_table[state])
         return self.actions[action_index]
-
-    # TODO: Fix broken update in Q-learning.
     
     def update(self, state, action, reward, next_state, next_action):
         q_val = self.q_table[state][self.actions.index(action)]
 
-        max_indices = []
         max_value = -Inf
-        for ind, val in enumerate(self.q_table[state]):
+        for ind, val in enumerate(self.q_table[next_state]):
             if val > max_value:
                 max_value = val
-                max_indices = [ind]
-            elif val == max_value:
-                max_indices.append(ind)
 
-        q_prime_val = self.q_table[next_state][max_indices[0]]
-        for ind in max_indices:
-            self.q_table[state][ind] = q_val \
-                + self.alpha * (reward + self.gamma * q_prime_val - q_val)
+        q_prime_val = max_value
+
+        self.q_table[state][self.actions.index(action)] = q_val + \
+            self.alpha * (reward + self.gamma * q_prime_val - q_val)
+        

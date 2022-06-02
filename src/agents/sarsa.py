@@ -1,6 +1,4 @@
-from random import random
 from agents.agent import Agent
-import policies.tabular_policies as tp
 
 class Agent(Agent):
     def __init__(self, name, num_states, gamma, policy, alpha):

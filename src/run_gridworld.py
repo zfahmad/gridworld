@@ -27,12 +27,12 @@ def main(argv):
     avg_num_steps = np.zeros(FLAGS.num_episodes)
     policy = getattr(policies.tabular_policies, FLAGS.policy)
 
-    for trial in range(FLAGS.num_trials):
+    for _ in range(FLAGS.num_trials):
         agent = agent_module.Agent(FLAGS.agent, gw.width * gw.height, 
                                   FLAGS.gamma, policy, FLAGS.alpha)
         steps_per_episode = []
 
-        for episode in range(FLAGS.num_episodes):
+        for _ in range(FLAGS.num_episodes):
             state = gw.start
             action = agent.select_action(state)
             step = 0
