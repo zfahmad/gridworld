@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import importlib
 
+
 FLAGS = flags.FLAGS
 flags.DEFINE_integer("max_steps", 500, "Maximum number of steps per episode.")
 flags.DEFINE_integer("num_episodes", 50, "Number of episodes.")
@@ -14,6 +15,7 @@ flags.DEFINE_string("policy", None, "Policy to use for selecting actions.")
 flags.DEFINE_string("agent", None, "RL algorithm for agent to use.")
 flags.DEFINE_float("gamma", 0.99, "Discount factor.")
 flags.DEFINE_float("alpha", 0.1, "Learning rate.")
+
 
 def main(argv):
     del argv
@@ -50,6 +52,7 @@ def main(argv):
     avg_num_steps = avg_num_steps / FLAGS.num_trials
     plt.plot(avg_num_steps)
     plt.show()
+
 
 if __name__ == "__main__":
     app.run(main)
