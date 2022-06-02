@@ -26,6 +26,17 @@ class Agent(Agent):
 
     def update(self, state, action, reward, next_state, next_action):
         q_val = self.q_table[state][self.actions.index(action)]
-        q_prime_val = self.q_table[next_state][self.actions.index(next_action)]
-        self.q_table[state][self.actions.index(action)] = q_val \
-            + self.alpha * (reward + self.gamma * q_prime_val - q_val)
+
+        max_indices = []
+        max_value = -Inf
+        for ind, val in enumerate(q_table[state]):
+            if val > max_value:
+                max_value = val
+                max_indices = [ind]
+            elif val == max_value:
+                max_indices.append(ind)
+
+        q_prime_val = self.q_table[next_state][max_indices[0]]
+        for ind in max_indices:
+            self.q_table[state][ind] = q_val \
+                + self.alpha * (reward + self.gamma * q_prime_val - q_val)
