@@ -1,6 +1,7 @@
 from random import random
 from agents.agent import Agent
 import policies.tabular_policies as tp
+from numpy import Inf
 
 class Agent(Agent):
     def __init__(self, name, num_states, gamma, policy, alpha):
@@ -29,7 +30,7 @@ class Agent(Agent):
 
         max_indices = []
         max_value = -Inf
-        for ind, val in enumerate(q_table[state]):
+        for ind, val in enumerate(self.q_table[state]):
             if val > max_value:
                 max_value = val
                 max_indices = [ind]

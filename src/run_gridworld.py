@@ -1,12 +1,10 @@
 from absl import app
 from absl import flags
 from gridworld import Gridworld
-# from agents.sarsa import SarsaAgent
-# from agents.q_learning import QLearningAgent
 import policies.tabular_policies
 import matplotlib.pyplot as plt
 import numpy as np
-import imp
+import importlib
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer("max_steps", 500, "Maximum number of steps per episode.")
@@ -22,15 +20,13 @@ def main(argv):
     gw = Gridworld(10, 10, 0, 80)
     for i in range(7):
         gw.grid[7][i] = 1
-    found = imp.find_module(FLAGS.agent, ["/home/zaheen/projects/gridworld/src/agents", "."])
-    try: agent_class = imp.load_module(FLAGS.agent, *found)
-    finally: found[0] and found[0].close()
+    agent_module = importlib.import_module("agents." + FLAGS.agent)
 
     avg_num_steps = np.zeros(FLAGS.num_episodes)
     policy = getattr(policies.tabular_policies, FLAGS.policy)
 
     for trial in range(FLAGS.num_trials):
-        agent = agent_class.Agent(FLAGS.agent, gw.width * gw.height, 
+        agent = agent_module.Agent(FLAGS.agent, gw.width * gw.height, 
                                   FLAGS.gamma, policy, FLAGS.alpha)
         steps_per_episode = []
 
