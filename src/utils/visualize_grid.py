@@ -9,7 +9,7 @@ def draw_gridworld(gw, start, goal, state):
     y = 0
 
     fig, ax = plt.subplots(figsize=(5, 5))
-    ax.plot = ([0, 1], [0, 1])
+    # ax.plot = ([0, 1], [0, 1])
 
     for row in range(gw.height):
         for col in range(gw.width):

@@ -22,9 +22,15 @@ flags.DEFINE_string("log_file", "logfile", "Log filename.")
 
 def main(argv):
     del argv
-    gw = Gridworld(10, 10, 0, 80)
-    for i in range(7):
-        gw.grid[7][i] = 1
+    gw = Gridworld(11, 11, 0, 62)
+    for i in range(11):
+        gw.grid[5][i] = 1
+    for i in range(11):
+        gw.grid[i][5] = 1
+    gw.grid[5][2] = 0
+    gw.grid[5][8] = 0
+    gw.grid[2][5] = 0
+    gw.grid[8][5] = 0
     agent_module = importlib.import_module("agents." + FLAGS.agent)
 
     avg_num_steps = np.zeros(FLAGS.num_episodes)
